@@ -1,47 +1,122 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="en">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<head>
+    <title>Fnrsit</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+
+</head>
+
+<body class="app app-login p-0">
+    <div class="row g-0 app-auth-wrapper">
+        <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+            <div class="d-flex flex-column align-content-end">
+                <div class="app-auth-body mx-auto">
+                    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img
+                        src="assets/images/logo.png"
+                                class="logo-icon me-2" salt="logo"></a></div>
+
+                    <div class="auth-form-container text-start">
+
+                        <form class="auth-form login-form" method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="email mb-3">
+                                <label class="sr-only" for="signin-email">Email</label>
+                                <input id="signin-email" type="email" name="email" :value="old('email')" required
+                                    autofocus autocomplete="username"
+                                    class="form-control signin-email" placeholder="Email address" required="required">
+                            </div>
+                            <!--//form-group-->
+                            <div class="password mb-3">
+                                <label class="sr-only" for="signin-password">Password</label>
+                                <input id="signin-password" type="password" name="password" required
+                                    autocomplete="current-password" class="form-control signin-password"
+                                    placeholder="Password" required="required">
+                                <div class="extra mt-3 row justify-content-between">
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="RememberPassword">
+                                            <label class="form-check-label" for="RememberPassword">
+                                                Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!--//col-6-->
+                                    <div class="col-6">
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    </div>
+                                    <!--//col-6-->
+                                </div>
+                                <!--//extra-->
+                            </div>
+                            <!--//form-group-->
+                            <div class="text-center">
+                                <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Connectez-vous</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!--//auth-form-container-->
+
+                </div>
+                <!--//auth-body-->
+
+              {{--   <footer class="app-auth-footer">
+                    <div class="container text-center py-3">
+                        <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+                        <small class="copyright">Designed with <span class="sr-only">love</span><i class="fas fa-heart"
+                                style="color: #fb866a;"></i> by <a class="app-link"
+                                href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for
+                            developers</small>
+
+                    </div>
+                </footer> --}}
+                <!--//app-auth-footer-->
+            </div>
+            <!--//flex-column-->
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!--//auth-main-col-->
+        <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+            <div class="auth-background-holder">
+                <div style="background-image: url('{{ asset('assets/images/background/background-1.jpg') }}'); background-repeat: no-repeat; background-size: cover; width: 100%; ">
+                </div>
+            </div>
+            <div class="auth-background-mask"></div>
+            <div class="auth-background-overlay p-3 p-lg-5">
+                <div class="d-flex flex-column align-content-end h-100">
+                    <div class="h-100"></div>
+                    <div class="overlay-content p-3 p-lg-4 rounded">
+                        <h5 class="mb-3 overlay-title">Fonds d'Investissement </h5>
+                        <div>Portal is an admin dashboard template. You can download and view the
+                            template license
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--//auth-background-overlay-->
         </div>
+        <!--//auth-background-col-->
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+    </div>
+    <!--//row-->
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</body>
+
+</html>
