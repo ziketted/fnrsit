@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('secteurs', function (Blueprint $table) {
             $table->id();
+            $table->string('libelle');
+            $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict')
+                ->unUpdate('restrict');
         });
     }
 

@@ -14,6 +14,7 @@ class SecteurController extends Controller
     public function index()
     {
         //
+        return view('secteur.index');
     }
 
     /**
