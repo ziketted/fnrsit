@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('principale_depenses', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('partie');
             $table->string('libelle');
             $table->string('cout');
