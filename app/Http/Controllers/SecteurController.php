@@ -3,34 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Models\Secteur;
-use App\Http\Requests\StoreSecteurRequest;
-use App\Http\Requests\UpdateSecteurRequest;
+use Illuminate\Http\Request;
 
 class SecteurController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      */
     public function index()
     {
-        //
-        return view('secteur.index');
+        $secteurs = Secteur::all(); // Vous pouvez utiliser paginate() pour paginer les résultats
+
+        // Retourner la vue avec les secteurs
+        return view('secteur.index', compact('secteurs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('secteur.create');  // Assurez-vous que la vue 'secteur.create' existe
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSecteurRequest $request)
+    public function store(Request $request)
     {
-        //
+        // Validation des données du formulaire
+      $request->validate([
+            'libelle' => 'required|string|max:255|unique:secteurs,libelle',
+            'description' => 'nullable|string',
+        ], [
+            'libelle.unique' => 'Le libellé doit être unique. Ce libellé existe déjà.',
+        ]);
+
+        // Enregistrement des données dans la base de données
+        Secteur::create([
+            'user_id' => auth()->user()->id, // Si vous utilisez l'authentification
+            'libelle' => $request->libelle,
+            'description' => $request->description,
+        ]);
+
+        // Redirection avec un message de succès
+        return redirect()->route('secteur.index')->with('success', 'Secteur ajouté avec succès');
     }
 
     /**
@@ -38,7 +52,8 @@ class SecteurController extends Controller
      */
     public function show(Secteur $secteur)
     {
-        //
+
+        return view('secteur.show', compact('secteur'));
     }
 
     /**
@@ -46,15 +61,25 @@ class SecteurController extends Controller
      */
     public function edit(Secteur $secteur)
     {
-        //
+        return view('secteur.edit', compact('secteur'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSecteurRequest $request, Secteur $secteur)
+    public function update(Request $request, Secteur $secteur)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        $secteur->update([
+            'libelle' => $request->libelle,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('secteur.edit', $secteur)->with('success', 'Secteur mis à jour avec succès');
     }
 
     /**
@@ -62,6 +87,7 @@ class SecteurController extends Controller
      */
     public function destroy(Secteur $secteur)
     {
-        //
+        $secteur->delete();
+        return redirect()->route('secteur.index')->with('success', 'Secteur supprimé avec succès');
     }
 }

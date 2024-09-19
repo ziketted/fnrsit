@@ -15,13 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('libelle');
             $table->string('description');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('restrict')
-                ->unUpdate('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+
         });
     }
 

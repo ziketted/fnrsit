@@ -19,7 +19,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(callback: function () {
-    Route::get('/secteur', [SecteurController::class, 'index'])->name('secteur.index');
+    Route::get('/all', [SecteurController::class, 'index'])->name('secteur.index');
+    Route::get('/secteur', [SecteurController::class, 'create'])->name('secteur.create');
     Route::get('/secteur/{id}', [SecteurController::class, 'show'])->name('secteur.show');
     Route::get('/secteur/edit', [SecteurController::class, 'edit'])->name('secteur.edit');
     Route::post('/secteur/store', [SecteurController::class, 'store'])->name('secteur.store');
