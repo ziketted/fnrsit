@@ -15,9 +15,12 @@ class Entrepreneur extends Model
         'telephone',
         'mail',
         'nationalite',
-        
-    ];
 
+    ];
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 
 
 

@@ -44,4 +44,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function EntrepreneurUser(){
+        return $this->hasMany(Entrepreneur::class);
+    }
+
+    public function secteurUser(){
+        return $this->hasMany(Secteur::class);
+    }
+
 }
