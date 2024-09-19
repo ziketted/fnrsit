@@ -11,8 +11,10 @@ class Entrepreneur extends Model
     use HasFactory, SoftDeletes;
     protected $fillable= [
         'user_id',
-        'domaine',
-        'description',
+        'nom',
+        'telephone',
+        'mail',
+        'nationalite',
         
     ];
 

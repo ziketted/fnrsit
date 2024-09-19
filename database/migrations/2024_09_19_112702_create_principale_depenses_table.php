@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('principale_depenses', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('partie');
+            $table->string('libelle');
+            $table->string('cout');
+            $table->string('duree');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict')
+                ->unUpdate('restrict');
         });
     }
 

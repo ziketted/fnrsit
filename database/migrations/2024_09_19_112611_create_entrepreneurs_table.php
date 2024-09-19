@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('entrepreneurs', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('nom');
+            $table->string('telephone');
+            $table->string('mail');
+            $table->string('nationalite');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict')
+                ->unUpdate('restrict');
         });
     }
 
