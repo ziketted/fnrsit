@@ -13,26 +13,38 @@ return new class extends Migration
     {
         Schema::create('projets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+
             $table->string('titre');
-            $table->string('proprieteur');
             $table->string('budget');
-            $table->string('secteur');
             $table->string('debut');
             $table->string('fin');
+            $table->unsignedBigInteger('entrepreneur_id');
+            $table->unsignedBigInteger('secteur_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
+
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('restrict')
                 ->unUpdate('restrict');
+
+            $table->foreign('entrepreneur_id')
+                ->references('id')
+                ->on('entrepreneurs')
+                ->onDelete('restrict')
+                ->unUpdate('restrict');
+
+             $table->foreign('secteur_id')
+                ->references('id')
+                ->on('secteurs')
+                ->onDelete('restrict')
+                ->unUpdate('restrict');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('projets');

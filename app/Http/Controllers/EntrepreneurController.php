@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entrepreneur;
 use App\Http\Requests\StoreEntrepreneurRequest;
 use App\Http\Requests\UpdateEntrepreneurRequest;
+use Illuminate\Support\Facades\Auth;
 
 class EntrepreneurController extends Controller
 {
@@ -32,7 +33,7 @@ class EntrepreneurController extends Controller
         $validated = $request->validated(); // Validation automatique avec le FormRequest
 
         Entrepreneur::create([
-            'user_id' => auth()->id(), // Associer à l'utilisateur connecté
+            'user_id' => Auth::id(), // Associer à l'utilisateur connecté
             'nom' => $validated['nom'],
             'telephone' => $validated['telephone'],
             'mail' => $validated['mail'],

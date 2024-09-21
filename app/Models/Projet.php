@@ -9,12 +9,29 @@ class Projet extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable= [
-        'user_id',
         'titre',
-        'proprieteur',
         'budget',
-        'secteur',
         'debut',
         'fin',
+        'secteur_id',
+        'entrepreneur_id',
+        'user_id',
     ];
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function secteur()
+    {
+        return $this->belongsTo(\App\Models\Secteur::class);
+    }
+    public function entrepreneur()
+    {
+        return $this->belongsTo(\App\Models\Entrepreneur::class);
+    }
+
+
+
+
 }

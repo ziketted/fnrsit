@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Secteur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SecteurController extends Controller
 {
@@ -38,7 +39,7 @@ class SecteurController extends Controller
 
         // Enregistrement des données dans la base de données
         Secteur::create([
-            'user_id' => auth()->user()->id, // Si vous utilisez l'authentification
+            'user_id' => Auth::id(), // Si vous utilisez l'authentification
             'libelle' => $request->libelle,
             'description' => $request->description,
         ]);

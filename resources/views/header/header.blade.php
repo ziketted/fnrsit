@@ -13,10 +13,10 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- FontAwesome JS-->
-    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
 
 </head>
 
@@ -95,7 +95,7 @@
                                 @csrf
                             </form>
 
-				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="assets/images/user.png" alt="user profile"></a>
+				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="{{ asset('assets/images/user.png') }}" alt="user profile"></a>
 				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
 								<li><a class="dropdown-item" href="settings.html">Paramètres</a></li>
 								<li><hr class="dropdown-divider"></li>
@@ -112,7 +112,7 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-                    <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/logo.png" alt="logo"><span class="logo-text">FNRSIT</span></a>
+                    <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{{ asset('assets/images/logo.png') }}" alt="logo"><span class="logo-text">FNRSIT</span></a>
 
 		        </div><!--//app-branding-->
 
@@ -151,8 +151,8 @@
 					        </a><!--//nav-link-->
 					        <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
 						        <ul class="submenu-list list-unstyled">
-							        <li class="submenu-item"><a class="submenu-link" href="notifications.html">+ Nouveau</a></li>
-							        <li class="submenu-item"><a class="submenu-link" href="account.html">Nos projets</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="{{ route('projet.create') }}">+ Nouveau</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="{{ route('projet.index') }}">Nos projets</a></li>
 
 						        </ul>
 					        </div>

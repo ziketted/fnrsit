@@ -53,4 +53,12 @@ class User extends Authenticatable
         return $this->hasMany(Secteur::class);
     }
 
+    public function projetUser(){
+        return $this->hasMany(Projet::class);
+    }
+
+    public function projeCoutUser(){
+        return $this->hasMany(Projet::class);
+    }
+
 }

@@ -19,4 +19,9 @@ class Secteur extends Model
     {
         return $this->belongsTo(\App\Models\User::class);
     }
+
+    public function projetSecteur(){
+        return $this->hasMany(Projet::class);
+    }
+
 }

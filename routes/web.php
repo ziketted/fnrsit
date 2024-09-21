@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\EntrepreneurController;
+use App\Http\Controllers\PrincipaleDepenseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\SecteurController;
+use App\Models\PrincipaleDepense;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +40,17 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/entrepreneur/store', [EntrepreneurController::class, 'store'])->name('entrepreneur.store');
     Route::post('/entrepreneur/update', [EntrepreneurController::class, 'update'])->name('entrepreneur.update');
     Route::delete('/entrepreneur/delete', [EntrepreneurController::class, 'destroy'])->name('entrepreneur.destroy');
+
+});
+Route::middleware('auth')->group(callback: function () {
+    Route::get('/projets', [ProjetController::class, 'index'])->name('projet.index');
+    Route::get('/projet', [ProjetController::class, 'create'])->name('projet.create');
+    Route::get('/projet/{id}', [ProjetController::class, 'show'])->name('projet.show');
+    Route::get('/projet/edit', [ProjetController::class, 'edit'])->name('projet.edit');
+    Route::post('/projet/store', [ProjetController::class, 'store'])->name('projet.store');
+    Route::post('/principale-depense/store', [PrincipaleDepenseController::class, 'store'])->name('principale-depense.store');
+    Route::post('/projet/update', [ProjetController::class, 'update'])->name('projet.update');
+    Route::delete('/projet/delete', [ProjetController::class, 'destroy'])->name('projet.destroy');
 
 });
 

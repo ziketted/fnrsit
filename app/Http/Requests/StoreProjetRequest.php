@@ -11,18 +11,23 @@ class StoreProjetRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Autorisez ou non cette requête (true si tout utilisateur est autorisé)
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Règles de validation pour la mise à jour du projet.
      */
     public function rules(): array
     {
         return [
-            //
+            'titre' => 'required|string|max:255',
+            'budget' => 'required|numeric|min:0',
+            'debut' => 'required|date',
+            'fin' => 'required|date|after_or_equal:debut',
+            'secteur_id' => 'required|exists:secteurs,id',
+            'entrepreneur_id' => 'required|exists:entrepreneurs,id',
+
         ];
     }
 }
